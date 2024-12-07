@@ -6,30 +6,44 @@ const Item = ({
   text, 
   imageStyle, 
   textStyle, 
-  containerStyle 
+  containerStyle, 
+  imagePosition = 'bottom' // 默认设置图片在底部
 }) => {
   return (
     <View style={[styles.container, containerStyle]}>
-      {/* 其他内容可以放在顶部或中心 */}
+      {/* 主体内容，可以自定义其他部分 */}
       
-      {/* 底部内容 */}
-      <View style={styles.bottomContainer}>
-        {imageSource && <Image source={imageSource} style={[styles.image, imageStyle]} />}
-        {text && <Text style={[styles.text, textStyle]}>{text}</Text>}
-      </View>
+      {imagePosition === 'bottom' && (
+        <View style={styles.bottomContainer}>
+          {imageSource && <Image source={imageSource} style={[styles.image, imageStyle]} />}
+          {text && <Text style={[styles.text, textStyle]}>{text}</Text>}
+        </View>
+      )}
+
+      {imagePosition === 'right' && (
+        <View style={styles.rightContainer}>
+          {text && <Text style={[styles.text, textStyle]}>{text}</Text>}
+          {imageSource && <Image source={imageSource} style={[styles.image, imageStyle]} />}
+        </View>
+      )}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    justifyContent: 'flex-end',
+    justifyContent: 'center',
     alignItems: 'center',
     padding: 10,
     backgroundColor: '#fff',
   },
   bottomContainer: {
     justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 10,
+  },
+  rightContainer: {
+    flexDirection: 'row',
     alignItems: 'center',
     marginTop: 10,
   },
