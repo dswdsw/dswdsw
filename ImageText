@@ -1,0 +1,48 @@
+import React from 'react';
+import { View, Text, Image, StyleSheet } from 'react-native';
+
+const Item = ({ 
+  imageSource, 
+  text, 
+  imageStyle, 
+  textStyle, 
+  containerStyle 
+}) => {
+  return (
+    <View style={[styles.container, containerStyle]}>
+      {/* 其他内容可以放在顶部或中心 */}
+      
+      {/* 底部内容 */}
+      <View style={styles.bottomContainer}>
+        {imageSource && <Image source={imageSource} style={[styles.image, imageStyle]} />}
+        {text && <Text style={[styles.text, textStyle]}>{text}</Text>}
+      </View>
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    padding: 10,
+    backgroundColor: '#fff',
+  },
+  bottomContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 10,
+  },
+  image: {
+    width: 50,
+    height: 50,
+    resizeMode: 'contain',
+  },
+  text: {
+    fontSize: 14,
+    color: '#333',
+    marginTop: 5,
+  },
+});
+
+export default Item;
