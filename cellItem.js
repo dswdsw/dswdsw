@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { View, Text, TouchableOpacity, Image, StyleSheet, Switch } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-const CellItem = ({
+const CellItem = memo(({
   imageSource,
   title,
   subtitle,
@@ -11,6 +11,8 @@ const CellItem = ({
   onPress,
   showArrow = true
 }) => {
+  console.log('Rendering CellItem:', title); // 用于调试，查看是否触发多次渲染
+
   return (
     <TouchableOpacity onPress={onPress} style={styles.container}>
       <View style={styles.imageContainer}>
@@ -22,18 +24,16 @@ const CellItem = ({
         <Text style={styles.subtitle}>{subtitle}</Text>
       </View>
 
-      {/* 勾选功能 */}
       <Switch
         value={isChecked}
         onValueChange={onCheckChange}
         style={styles.switch}
       />
 
-      {/* 箭头 */}
       {showArrow && <Icon name="angle-right" size={24} color="#aaa" />}
     </TouchableOpacity>
   );
-};
+});
 
 const styles = StyleSheet.create({
   container: {
